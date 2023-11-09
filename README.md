@@ -1,2 +1,1 @@
-# promo-react
-promo generator react
+# promo

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Promo generator</title>
+</head>
+
+<body>
+  <main class="page-main container">
+    <form action="#" id="form" class="main__form">
+      <div class="main__form-container">
+        <div class="main__form-container-item">
+          <label for="promo-count">
+            Количество промокодов:
+            <input type="text" id="promo-count">
+          </label>
+          <label for="promo-prefix">
+            Префикс к промокоду:
+            <input type="text" id="promo-prefix">
+          </label>
+          <label for="promo-length">
+            Общая длина промокода:
+            <input type="text" id="promo-length">
+          </label>
+
+        </div>
+        <div class="main__form-container-item checkbox">
+
+          <h3 class="main__form-item-label">Словарь:</h3>
+          <label for="dict-digit">
+            <input type="checkbox" name="dict-digit" value="0-9" id="dict-digit" data-id="1">0-9
+          </label>
+          <label for="dict-big-letter-l">
+            <input type="checkbox" name="dict-big-letter-l" value="A-Z" id="dict-big-letter-l" data-id="2">A-Z
+          </label>
+          <label for="dict-small-letter-l">
+            <input type="checkbox" name="dict-small-letter-l" value="a-z" id="dict-small-letter-l" data-id="3">a-z
+          </label>
+          <label for="dict-big-letter-k">
+            <input type="checkbox" name="dict-big-letter-k" value="А-Я" id="dict-big-letter-k" data-id="4">А-Я
+          </label>
+          <label for="dict-small-letter-k">
+            <input type="checkbox" name="dict-small-letter-k" value="а-я" id="dict-small-letter-k" data-id="5">а-я
+          </label>
+        </div>
+        <div class="main__form-container-item">
+          <button class="main__form-btn" type="submit" id="btn-submit">Export to CSV</button>
+          <textarea class="main__form-textarea" name="custom-dictionary" id="custom-dictionary"></textarea>
+        </div>
+        <div class="main__form-message" id="message"></div>
+      </div>
+    </form>
+  </main>
+</body>
+
+</html>
