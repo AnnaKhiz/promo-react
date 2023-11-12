@@ -1,10 +1,11 @@
-import React from "react";
+import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
+import {getCheckboxAction} from '../actions';
 
 export const ElementCheckbox = (props) => {
+const dispatch = useDispatch();
   const restArray = [];
 
-  const dispatch = useDispatch();
   const digitsValue = useSelector(store => store.checkboxReducer.digits.value);
   const latinLettersBigValue = useSelector(store => store.checkboxReducer.latinLettersBig.value);
   const latinLettersSmallValue = useSelector(store => store.checkboxReducer.latinLettersSmall.value);
@@ -44,7 +45,7 @@ export const ElementCheckbox = (props) => {
 
 
   const getCheckValue = (type, event) => {
-    dispatch({type: type});
+    dispatch(getCheckboxAction(type));
     const customDictionary = document.getElementById('custom-dictionary');
     let target = checkedStates[event.target.dataset.id-1]
 

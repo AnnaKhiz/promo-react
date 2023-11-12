@@ -1,18 +1,37 @@
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+body
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(115,99,159,1) 50%, rgba(23,24,115,1) 100%)
 .container
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 100vh
   max-width: 160rem
   margin: 0 auto
-  padding: 5rem 1.5rem
 .main
   justify-content: center
   align-items: center
   display: flex
   &__form
+    position: relative
     margin-bottom: 20px
     width: 800px
     border: 1px solid gray
     border-radius: 20px
     padding: 20px
-
+    background-color: white
+    &:before
+      content: ''
+      position: absolute
+      inset: -5px
+      z-index: -1
+      border-radius: 20px
+      opacity: 0.3
+      filter: blur(5px)
+      background: linear-gradient(90deg, rgba(237,238,174,1) 0%, rgba(247,160,45,1) 100%)
     &-btn
       background-color: transparent
       padding: 15px

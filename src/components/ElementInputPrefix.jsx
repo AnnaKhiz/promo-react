@@ -1,18 +1,20 @@
-import React from "react";
-import {useDispatch} from "react-redux";
+import React from 'react';
+import {useDispatch} from 'react-redux';
+import {getStringPrefixAction} from '../actions';
 
 export const ElementInputPrefix= (props) => {
+
   const dispatch = useDispatch();
 
   const getValue = (event) => {
-    dispatch({type: "SET_STRING_PREFIX", payload: event.target.value})
+    dispatch(getStringPrefixAction(event));
   }
 
   return (
     <>
-      <label htmlFor="promo-prefix">
+      <label htmlFor='promo-prefix'>
         Префикс к промокоду:
-        <input type="text" id="promo-prefix" onChange={getValue}/>
+        <input type='text' id='promo-prefix' onChange={getValue}/>
       </label>
     </>
   )

@@ -1,13 +1,13 @@
 import React from "react";
 import {useDispatch} from "react-redux";
+import {getStringLengthAction} from '../actions';
 
 export const ElementInputLength= (props) => {
-
   const dispatch = useDispatch();
 
   const getValue = (event) => {
     props.checkValidity(event);
-    dispatch({type: "SET_STRING_LENGTH", payload: event.target.value})
+    dispatch(getStringLengthAction(event));
   }
 
   return (

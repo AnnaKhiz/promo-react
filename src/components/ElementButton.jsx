@@ -1,18 +1,18 @@
-import React from "react";
-import {CONSTANT} from "../js/constants";
-import {useDispatch, useSelector} from "react-redux";
+import React from 'react';
+import {CONSTANT} from '../js/constants';
+import {useDispatch, useSelector} from 'react-redux';
 import { json2csv } from 'json-2-csv';
+import {getCustomDictionaryAction} from '../actions';
 
 export const ElementButton = (props) => {
   const dispatch = useDispatch();
   const message = document.getElementById('message');
-
+  const countElement = document.getElementById('promo-count');
+  const lengthElement = document.getElementById('promo-length');
   const count = useSelector(store => store.stringDataReducer.countPromo);
   const prefix = useSelector(store => store.stringDataReducer.stringPrefix);
   const length = useSelector(store => store.stringDataReducer.stringLength);
   let dictArray = [useSelector(store => store.textareaReducer.value)];
-  const countElement = document.getElementById('promo-count');
-  const lengthElement = document.getElementById('promo-length');
   let promoGeneral = 0;
   let finalLength = 0;
   let promoPrefix = '';
@@ -63,8 +63,7 @@ export const ElementButton = (props) => {
 
   const getCustonDictionaryValue = () => {
     const customDictionary = document.getElementById('custom-dictionary');
-    console.log(customDictionary.value);
-    dispatch({type: "GET_CUSTOM_DICT", payload: customDictionary.value})
+    dispatch(getCustomDictionaryAction(customDictionary));
   }
 
   const generateRandomPromo = (length, checkedDict) => {
@@ -92,7 +91,7 @@ export const ElementButton = (props) => {
     }
 
     if (length > Math.pow(checkedDict.length, stringLength)) {
-      message.innerText = "Невозможно сгенерировать. Выберите больше вариантов из списка словарей.";
+      message.innerText = 'Невозможно сгенерировать. Выберите больше вариантов из списка словарей.';
       return [];
     } else {
       message.innerText = '';
