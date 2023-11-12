@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { ElementInputCount } from './ElementInputCount.jsx';
 import { ElementInputPrefix } from './ElementInputPrefix.jsx';
 import { ElementInputLength } from './ElementInputLength.jsx';
@@ -9,42 +9,31 @@ import { ErrorBlockComponent } from './ErrorBlockComponent.jsx';
 import { CONSTANT } from "../js/constants.js";
 
 export const FormComponent = () => {
-  const message = document.getElementById('message');
-
-  const [countValue, setCountValue] = useState('');
-  const [prefixValue, setPrefixValue] = useState('');
-  const [lengthValue, setLengthValue] = useState('');
 
 
-  const getInputCount = (value) => {
-    setCountValue(value);
-    // console.log(countValue)
+  const checkValidity = (event) => {
+    const message = document.getElementById('message');
+    const element = event.target;
+    element.addEventListener('keyup', (e) => {
+      element.value = element.value.replace(CONSTANT.REGEX_DIGITS, '');
+    })
+    element.addEventListener('blur', (e) => {
+      if (element.value.replaceAll(' ','') === '') {
+        message.innerText = 'Заполните все поля!';
+      } else {
+        message.innerText = '';
+      }
+    });
   }
-
-  const getInputPrefix = (value) => {
-    setPrefixValue(value);
-    // console.log(prefixValue)
-  }
-
-  const getInputLength = (value) => {
-    setLengthValue(value);
-    // console.log(lengthValue)
-  }
-
-  const showFinalCode = () => {
-
-  }
-
-
 
   return (
     <>
       <form action="#" id="form" className="main__form">
         <div className="main__form-container">
           <div className="main__form-container-item">
-            <ElementInputCount getInputCount={getInputCount}/>
-            <ElementInputPrefix getInputPrefix={getInputPrefix}/>
-            <ElementInputLength getInputLength={getInputLength}/>
+            <ElementInputCount  checkValidity={checkValidity}/>
+            <ElementInputPrefix />
+            <ElementInputLength checkValidity={checkValidity} />
           </div>
           <div className="main__form-container-item checkbox">
             <ElementCheckbox />
@@ -54,10 +43,8 @@ export const FormComponent = () => {
             <ElementTextarea />
           </div>
           <ErrorBlockComponent />
-
         </div>
       </form>
-
     </>
   )
 }

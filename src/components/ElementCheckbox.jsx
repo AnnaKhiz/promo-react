@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {CONSTANT} from "../js/constants";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-
 export const ElementCheckbox = (props) => {
+  const restArray = [];
 
   const dispatch = useDispatch();
   const digitsValue = useSelector(store => store.checkboxReducer.digits.value);
@@ -12,19 +11,38 @@ export const ElementCheckbox = (props) => {
   const cyrillicLettersBigValue = useSelector(store => store.checkboxReducer.cyrillicLettersBig.value);
   const cyrillicLettersSmallValue = useSelector(store => store.checkboxReducer.cyrillicLettersSmall.value);
 
-
   let digitIsChecked = useSelector(state => state.checkboxReducer.digits.isChecked);
   let bigLettersIsChecked = useSelector(state => state.checkboxReducer.latinLettersBig.isChecked);
+
   const checkedStates = [
-    {id: useSelector(state => state.checkboxReducer.digits.id), value: digitsValue, isChecked: digitIsChecked},
-    {id: useSelector(state => state.checkboxReducer.latinLettersBig.id), value: latinLettersBigValue, isChecked: bigLettersIsChecked},
-    {id: useSelector(state => state.checkboxReducer.latinLettersSmall.id), value: latinLettersSmallValue, isChecked: useSelector(state => state.checkboxReducer.latinLettersSmall.isChecked)},
-    {id: useSelector(state => state.checkboxReducer.cyrillicLettersBig.id), value: cyrillicLettersBigValue, isChecked: useSelector(state => state.checkboxReducer.cyrillicLettersBig.isChecked)},
-    {id: useSelector(state => state.checkboxReducer.cyrillicLettersSmall.id), value: cyrillicLettersSmallValue, isChecked: useSelector(state => state.checkboxReducer.cyrillicLettersSmall.isChecked)}
+    {
+      id: useSelector(state => state.checkboxReducer.digits.id),
+      value: digitsValue,
+      isChecked: digitIsChecked
+    },
+    {
+      id: useSelector(state => state.checkboxReducer.latinLettersBig.id),
+      value: latinLettersBigValue,
+      isChecked: bigLettersIsChecked
+    },
+    {
+      id: useSelector(state => state.checkboxReducer.latinLettersSmall.id),
+      value: latinLettersSmallValue,
+      isChecked: useSelector(state => state.checkboxReducer.latinLettersSmall.isChecked)
+    },
+    {
+      id: useSelector(state => state.checkboxReducer.cyrillicLettersBig.id),
+      value: cyrillicLettersBigValue,
+      isChecked: useSelector(state => state.checkboxReducer.cyrillicLettersBig.isChecked)
+    },
+    {
+      id: useSelector(state => state.checkboxReducer.cyrillicLettersSmall.id),
+      value: cyrillicLettersSmallValue,
+      isChecked: useSelector(state => state.checkboxReducer.cyrillicLettersSmall.isChecked)
+    }
   ]
 
-  console.log(checkedStates)
-  const restArray = [];
+
   const getCheckValue = (type, event) => {
     dispatch({type: type});
     const customDictionary = document.getElementById('custom-dictionary');
@@ -36,18 +54,14 @@ export const ElementCheckbox = (props) => {
       const dict = [...document.querySelectorAll('input[type="checkbox"]')];
       dict.map((element, index) => {
         if (element.checked) {
-
           restArray.push(checkedStates[element.dataset.id-1].value)
         }
       })
       customDictionary.value = '';
       customDictionary.value = restArray.join('').toString()
       }
-
-    console.log(restArray)
     customDictionary.innerText = customDictionary.value
   }
-
 
 
   return (

@@ -1,49 +1,24 @@
 import React from "react";
 import {CONSTANT} from "../js/constants";
 import {useDispatch, useSelector} from "react-redux";
-import store from "../store";
 import { json2csv } from 'json-2-csv';
 
 export const ElementButton = (props) => {
-
   const dispatch = useDispatch();
-  const checkbox09 = useSelector(state => state.checkboxReducer.digits.isChecked)
-  const checkboxAZ = useSelector(state => state.checkboxReducer.latinLettersBig.isChecked)
-  const checkboxaz = useSelector(state => state.checkboxReducer.latinLettersSmall.isChecked)
-  const checkboxAZCyr = useSelector(state => state.checkboxReducer.cyrillicLettersBig.isChecked)
-  const checkboxazCyr = useSelector(state => state.checkboxReducer.cyrillicLettersSmall.isChecked)
-  const checkedArr = [checkbox09, checkboxAZ, checkboxaz, checkboxAZCyr, checkboxazCyr];
-  // console.log(checkedArr)
-
   const message = document.getElementById('message');
+
   const count = useSelector(store => store.stringDataReducer.countPromo);
-  // console.log(count)
   const prefix = useSelector(store => store.stringDataReducer.stringPrefix);
-  // console.log(prefix)
   const length = useSelector(store => store.stringDataReducer.stringLength);
-  // console.log(length)
+  let dictArray = [useSelector(store => store.textareaReducer.value)];
   const countElement = document.getElementById('promo-count');
   const lengthElement = document.getElementById('promo-length');
   let promoGeneral = 0;
   let finalLength = 0;
   let promoPrefix = '';
-  let dictArray = [useSelector(store => store.textareaReducer.value)];
-  let finalCodeArray = []
+  let finalCodeArray = [];
   let jsonArray = [];
 
-  // const digitsValue = useSelector(state => state.digits.value);
-  // const latinLettersBigValue = useSelector(state => state.latinLettersBig.value);
-  // const latinLettersSmallValue = useSelector(store => store.latinLettersSmall.value);
-  // const cyrillicLettersBigValue = useSelector(store => store.cyrillicLettersBig.value);
-  // const cyrillicLettersSmallValue = useSelector(store => store.cyrillicLettersSmall.value);
-
-  const checkSymbols = (elem, reg) => {
-    // console.log(elem)
-
-    elem.toString().addEventListener('keyup', (e) => {
-      elem.value = elem.value.replace(reg, '');
-    })
-  }
 
   const checkCountLength = (count) => {
     let countChecked = count.replaceAll(' ','');
@@ -137,24 +112,12 @@ export const ElementButton = (props) => {
     document.body.appendChild(newElemDownload);
     newElemDownload.click();
     document.body.removeChild(newElemDownload);
-
-    console.log(finalCodeArray)
     finalCodeArray = [];
-    console.log(finalCodeArray)
   }
-
-
-  // const textareaValue = useSelector(store => store.textareaReducer.value)
-  // console.log(textareaValue)
-
-  const form = document.getElementById('form');
 
   const mainFunctionSubmit = () => {
     const customDictionary = document.getElementById('custom-dictionary');
 
-    // form.addEventListener('submit', (e) => {
-      console.log(`button clicked`)
-      // e.preventDefault();
       if (countElement.value.replaceAll(' ','') !== '' || lengthElement.value.replaceAll(' ','') !== '') {
         message.innerText = '';
         if (checkCountLength(count) && checkPrefixLength(prefix, length) && checkGeneralCodeLength(length, prefix)) {
@@ -190,20 +153,14 @@ export const ElementButton = (props) => {
       } else {
         message.innerText = 'Заполните пустые поля';
       }
-
-    // })
   }
 
 
   const showResult = (event) => {
     event.preventDefault();
-    // checkSymbols(count, CONSTANT.REGEX_DIGITS);
-    // checkSymbols(length, CONSTANT.REGEX_DIGITS);
 
-    getCustonDictionaryValue()
-    mainFunctionSubmit()
-
-    console.log(finalLength)
+    getCustonDictionaryValue();
+    mainFunctionSubmit();
   }
 
   return (

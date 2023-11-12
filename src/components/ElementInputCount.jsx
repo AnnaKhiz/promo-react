@@ -4,12 +4,10 @@ import {useDispatch} from "react-redux";
 export const ElementInputCount = (props) => {
   const dispatch = useDispatch();
 
-
   const getValue = (event) => {
-    props.getInputCount(event.target.value);
+    props.checkValidity(event);
     dispatch({type: "SET_COUNT_PROMO", payload: event.target.value})
   }
-
 
   return (
     <>
