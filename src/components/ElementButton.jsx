@@ -19,7 +19,6 @@ export const ElementButton = (props) => {
   let finalCodeArray = [];
   let jsonArray = [];
 
-
   const checkCountLength = (count) => {
     let countChecked = count.replaceAll(' ','');
 
@@ -27,10 +26,10 @@ export const ElementButton = (props) => {
       message.innerText = '';
       promoGeneral = +countChecked;
       return true;
-    } else {
-      message.innerText = 'Слишком большое количество промо-кодов или пустое поле.';
-      return false;
     }
+    message.innerText = 'Слишком большое количество промо-кодов или пустое поле.';
+    return false;
+
   }
 
   const checkPrefixLength = (prefix, length) => {
@@ -41,10 +40,10 @@ export const ElementButton = (props) => {
       message.innerText = '';
       promoPrefix = prefixChecked;
       return true;
-    } else {
-      message.innerText = 'Длина префикса должна быть меньше чем общая длина промо-кода';
-      return false;
     }
+    message.innerText = 'Длина префикса должна быть меньше чем общая длина промо-кода';
+    return false;
+
   }
 
   const checkGeneralCodeLength = (length, prefix) => {
@@ -55,15 +54,20 @@ export const ElementButton = (props) => {
       message.innerText = '';
       finalLength = lengthChecked - prefixChecked.length;
       return true;
-    } else {
-      message.innerText = `Рекомендуемая длина промо-кода не более ${CONSTANT.MAX_PROMO_LENGTH} символов (с учетом  длины префикса)`;
-      return false;
     }
+    message.innerText = `Рекомендуемая длина промо-кода не более ${CONSTANT.MAX_PROMO_LENGTH} символов (с учетом  длины префикса)`;
+    return false;
   }
 
   const getCustonDictionaryValue = () => {
     const customDictionary = document.getElementById('custom-dictionary');
-    dispatch(getCustomDictionaryAction(customDictionary));
+    const message = document.getElementById('message');
+    if (customDictionary.value !== '') {
+      dispatch(getCustomDictionaryAction(customDictionary));
+    } else {
+      message.innerText = 'Выберите словарь!';
+    }
+
   }
 
   const generateRandomPromo = (length, checkedDict) => {
@@ -73,7 +77,6 @@ export const ElementButton = (props) => {
     }
     return randomString;
   }
-
 
   const createJSONArray = (randomStringsArray, length, stringLength, checkedDict) => {
     let str;
@@ -121,7 +124,7 @@ export const ElementButton = (props) => {
         message.innerText = '';
         if (checkCountLength(count) && checkPrefixLength(prefix, length) && checkGeneralCodeLength(length, prefix)) {
           dictArray = customDictionary.value.toString().replaceAll(' ','');
-          console.log(`dictArray` + dictArray)
+
           function memorize () {
             const checkedDict = dictArray;
             const memo = {};
@@ -154,10 +157,8 @@ export const ElementButton = (props) => {
       }
   }
 
-
   const showResult = (event) => {
     event.preventDefault();
-
     getCustonDictionaryValue();
     mainFunctionSubmit();
   }
@@ -165,7 +166,7 @@ export const ElementButton = (props) => {
   return (
     <>
       <button className="main__form-btn" type="submit" id="btn-submit" onClick={showResult}>
-        Export to CSV
+        Экспортировать в CSV
       </button>
     </>
   )

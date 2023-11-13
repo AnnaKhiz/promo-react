@@ -37,10 +37,11 @@ export const FormComponent = () => {
           </div>
           <div className="main__form-container-item checkbox">
             <ElementCheckbox />
-          </div>
-          <div className="main__form-container-item">
-            <ElementButton />
             <ElementTextarea />
+          </div>
+          <div className="main__form-container-item button">
+            <ElementButton />
+
           </div>
           <ErrorBlockComponent />
         </div>
