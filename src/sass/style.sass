@@ -1,3 +1,4 @@
+
 *
   margin: 0
   padding: 0
@@ -14,8 +15,32 @@ body
   margin: 0 auto
   @media screen and (max-width: 370px)
     height: fit-content
+.button-back
+  position: relative
+
+  &:before
+    position: fixed
+    top: calc(50% - 50px)
+    left: 0
+    z-index: 5
+    content: ''
+    width: 50px
+    height: 50px
+    border-radius: 50%
+    display: block
+    background: white
+    cursor: pointer
+    filter: drop-shadow(2px 2px 6px black)
+  &:after
+    position: fixed
+    top: calc(50% - 50px + 13px)
+    left: 12px
+    z-index: 6
+    content: url("../../src/images/back-arrow.png")
+    cursor: pointer
 .main
   &__form
+
     position: relative
     width: 30%
     border: 1px solid gray

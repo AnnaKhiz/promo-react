@@ -8,9 +8,14 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
+
     },
     module: {
         rules: [
+            {
+                test: /\.(jpg|png|svg|gif)$/,
+                type: 'asset/resource',
+            },
             {
                 test: /\.s[ac]ss$/i,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
@@ -24,15 +29,6 @@ module.exports = {
                     }
                 }
             },
-            {
-                test: /\.(jpg|png|gif|woff|eot|ttf|svg)/,
-                use: {
-                    loader: 'url-loader',
-                    options: {
-                        limit: 50000
-                    }
-                }
-            }
         ],
     },
     plugins: [

@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { backToPortfolio } from "../js/back.js";
 import { ElementInputCount } from './ElementInputCount.jsx';
 import { ElementInputPrefix } from './ElementInputPrefix.jsx';
 import { ElementInputLength } from './ElementInputLength.jsx';
@@ -10,8 +11,10 @@ import { CONSTANT } from "../js/constants.js";
 
 export const FormComponent = () => {
 
+  useEffect(backToPortfolio, [])
 
   const checkValidity = (event) => {
+
     const message = document.getElementById('message');
     const element = event.target;
     element.addEventListener('keyup', (e) => {
@@ -28,8 +31,9 @@ export const FormComponent = () => {
 
   return (
     <>
-      <form action="#" id="form" className="main__form">
-        <div className="main__form-container">
+      <div className="button-back" id="button-back"></div>
+      <form action="#" id="form" className="main__form ">
+        <div className="main__form-container" >
           <div className="main__form-container-item">
             <ElementInputCount  checkValidity={checkValidity}/>
             <ElementInputPrefix />
